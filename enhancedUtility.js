@@ -1,5 +1,5 @@
 window.ccc = window.ccc || {};
-ccc.util = ((c3u) => {
+window.ccc.util = ((c3u) => {
     ///////////////Front-End///////////////
     c3u.getUidOfContainingBlock = (el) => {
         return el.closest('.rm-block__input').id.slice(-9)
@@ -146,5 +146,5 @@ ccc.util = ((c3u) => {
     }
 
     return c3u;
-})(ccc.util || {});
+})(window.ccc.util || {});
 
