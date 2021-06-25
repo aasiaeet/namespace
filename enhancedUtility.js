@@ -126,6 +126,25 @@ ccc.util = ((c3u) => {
         }
         return pageUid;
     }
+
+
+    c3u.getUidFromNestedNodes = (node, descendantUids) => {
+        if (node.uid) descendantUids.push(node.uid)
+        if (node.children)
+            node.children.forEach(child => c3u.getUidFromNestedNodes(child, descendantUids))
+    }
+
+    c3u.isAncestor = (a, b) => {
+        const results = window.roamAlphaAPI.q(
+            `[:find (pull ?root [* {:block/children [:block/uid {:block/children ...}]}])
+            :where
+                [?root :block/uid \"${a}\"]]`);
+        if (!results.length) return false;
+        let descendantUids = [];
+        c3u.getUidFromNestedNodes(results[0][0], descendantUids)
+        return descendantUids.includes(b);
+    }
+
     return c3u;
 })(ccc.util || {});
 
