@@ -1,4 +1,4 @@
-ccc = ccc || {};
+var ccc = ccc || {};
 ccc.util = ((c3u) => {
     ///////////////Front-End///////////////
     c3u.getUidOfContainingBlock = (el) => {
