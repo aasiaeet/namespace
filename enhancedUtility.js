@@ -1,5 +1,5 @@
-window.ccc = window.ccc || {};
-window.ccc.util = ((c3u) => {
+ccc = ccc || {};
+ccc.util = ((c3u) => {
     ///////////////Front-End///////////////
     c3u.getUidOfContainingBlock = (el) => {
         return el.closest('.rm-block__input').id.slice(-9)
@@ -43,8 +43,6 @@ window.ccc.util = ((c3u) => {
         }
         return hash;
     }
-
-
 
     c3u.createChildBlock = (parentUid, order, childString, childUid) => {
         return window.roamAlphaAPI.createBlock(
@@ -127,13 +125,6 @@ window.ccc.util = ((c3u) => {
         return pageUid;
     }
 
-
-    c3u.getUidFromNestedNodes = (node, descendantUids) => {
-        if (node.uid) descendantUids.push(node.uid)
-        if (node.children)
-            node.children.forEach(child => c3u.getUidFromNestedNodes(child, descendantUids))
-    }
-
     c3u.isAncestor = (a, b) => {
         const results = window.roamAlphaAPI.q(
             `[:find (pull ?root [* {:block/children [:block/uid {:block/children ...}]}])
@@ -144,6 +135,12 @@ window.ccc.util = ((c3u) => {
         c3u.getUidFromNestedNodes(results[0][0], descendantUids)
         return descendantUids.includes(b);
     }
+
+    c3u.getUidFromNestedNodes = (node, descendantUids) => {
+        if (node.uid) descendantUids.push(node.uid)
+        if (node.children)
+            node.children.forEach(child => c3u.getUidFromNestedNodes(child, descendantUids))
+    }    
 
     return c3u;
 })(window.ccc.util || {});
