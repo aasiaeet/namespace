@@ -1,4 +1,4 @@
-var ccc = ccc || {};
+var ccc = window.ccc || {};
 ccc.util = ((c3u) => {
     ///////////////Front-End///////////////
     c3u.getUidOfContainingBlock = (el) => {
