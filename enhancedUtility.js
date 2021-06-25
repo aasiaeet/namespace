@@ -143,5 +143,5 @@ ccc.util = ((c3u) => {
     }    
 
     return c3u;
-})(window.ccc.util || {});
+})(ccc.util || {});
 
